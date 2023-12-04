@@ -1,0 +1,22 @@
+#!/bin/sh
+  
+set -e
+umask 0002
+
+if [ "$1" == "--" ]; then
+
+  /usr/bin/sudo /usr/bin/systemctl --quiet disable sshd.service
+
+  if test -f "disabled.bin"; then
+    echo "sshd is already disabled."
+  else
+    touch "disabled.bin"
+    if systemctl is-active --quiet sshd-autodiscovery.service; then
+      /usr/bin/sudo /usr/bin/systemctl stop sshd.service
+    else
+      echo "sshd will be disabled on next reboot."
+    fi
+  fi
+
+fi
+

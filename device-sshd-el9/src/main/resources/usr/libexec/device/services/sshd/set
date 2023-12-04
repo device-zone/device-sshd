@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+umask 0002
+
+OPTIONS="--polar disabled --polar password-authentication"
+
+if [ "$1" == "--" ]; then
+
+  /usr/libexec/device-set ${OPTIONS} "$@"
+
+  if test -f "disabled.bin"; then
+    /usr/bin/sudo /usr/bin/systemctl --quiet disable sshd.service
+    if systemctl is-active --quiet sshd-autodiscovery.service; then
+      /usr/bin/sudo /usr/bin/systemctl stop sshd.service
+    else
+      echo "sshd will be disabled on next reboot."
+    fi
+  else
+    /usr/bin/sudo /usr/bin/systemctl --quiet enable sshd.service
+    if systemctl is-active --quiet sshd-autodiscovery.service; then
+      /usr/bin/sudo /usr/bin/systemctl restart sshd-autodiscovery.service
+      /usr/bin/sudo /usr/bin/systemctl restart sshd.service
+    else
+      echo "sshd will be enabled on next reboot."
+    fi
+  fi
+
+elif [ "$1" == "-c" ]; then
+
+  /usr/libexec/device-set ${OPTIONS} "$@"
+
+fi
+

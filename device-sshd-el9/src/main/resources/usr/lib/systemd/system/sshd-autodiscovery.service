@@ -1,0 +1,15 @@
+# systemd service for managing all sshd autoconfiguration.
+
+[Unit]
+Description=Sshd Configuration Autodiscovery
+Before=sshd.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/libexec/device-autodiscovery/sshd
+ExecReload=/bin/bash /usr/libexec/device-autodiscovery/sshd
+RemainAfterExit=on
+
+[Install]
+WantedBy=multi-user.target
+
