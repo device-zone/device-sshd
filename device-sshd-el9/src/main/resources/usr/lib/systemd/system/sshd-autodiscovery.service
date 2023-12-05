@@ -2,6 +2,8 @@
 
 [Unit]
 Description=Sshd Configuration Autodiscovery
+PartOf=sshd.service
+ReloadPropagatedFrom=sshd.service
 Before=sshd.service
 
 [Service]
