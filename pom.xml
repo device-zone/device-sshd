@@ -10,9 +10,9 @@
   <groupId>zone.device.platform</groupId>
   <version>0.9.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>device authselect package</name>
-  <description>Packaging for the authselect appliance</description>
-  <inceptionYear>2022</inceptionYear>
+  <name>device sshd package</name>
+  <description>Packaging for the sshd appliance</description>
+  <inceptionYear>2023</inceptionYear>
 
   <organization>
     <name>Device Project</name>
