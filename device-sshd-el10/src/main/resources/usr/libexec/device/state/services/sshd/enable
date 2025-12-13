@@ -10,7 +10,7 @@ if [ "$1" == "--" ]; then
   if test ! -f "disabled.bin"; then
     echo "sshd is already enabled."
   else
-    rm "disabled.bin"
+    /usr/libexec/device-tool --lock /etc/device/services/sshd/ --polar disabled -- "disabled" "no"
     if systemctl is-active --quiet sshd-autodiscovery.service; then
       /usr/bin/sudo /usr/bin/systemctl restart sshd-autodiscovery.service
       /usr/bin/sudo /usr/bin/systemctl restart sshd.service

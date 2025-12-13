@@ -3,15 +3,18 @@
 set -e
 umask 0002
 
-OPTIONS="--show - --polar disabled --polar password-authentication"
+OPTIONS="--show - \
+         --polar disabled \
+         --polar password-authentication \
+         --lock /etc/device/services/sshd/"
 
 if [ "$1" == "--" ]; then
 
-  /usr/libexec/device-set ${OPTIONS} "$@"
+  /usr/libexec/device-tool ${OPTIONS} "$@"
 
 elif [ "$1" == "-c" ]; then
 
-  /usr/libexec/device-set ${OPTIONS} "$@"
+  /usr/libexec/device-tool ${OPTIONS} "$@"
 
 fi
 
