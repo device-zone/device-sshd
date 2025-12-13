@@ -8,8 +8,8 @@ Before=sshd.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/bash /usr/libexec/device-autodiscovery/sshd
-ExecReload=/bin/bash /usr/libexec/device-autodiscovery/sshd
+ExecStart=/usr/bin/sequence -s daemon.info -b /usr/libexec device/autodiscovery/sshd.d start
+ExecReload=/usr/bin/sequence -s daemon.info -b /usr/libexec device/autodiscovery/sshd.d reload
 RemainAfterExit=on
 
 [Install]
